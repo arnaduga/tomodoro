@@ -36,9 +36,12 @@ jobs:
       - name: Copy files required
         run: |
           mkdir dist
+          mkdir dist/icons
           cp index.* ./dist/
           cp *.js ./dist/
           cp *.png ./dist
+          cp site.webmanifest ./dist
+          cp ./icons/* ./dist/icons/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
