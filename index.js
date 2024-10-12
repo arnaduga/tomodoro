@@ -132,7 +132,8 @@ function nextRound() {
 			maxDuration: config[roundInfo.current],
 		});
 	}
-	notify(`${finished} Complete`, body);
+	notify(`${finished} complete!`, body);
+	pauseplay()
 }
 
 function pauseplay() {
