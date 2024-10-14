@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Custom icon (and change the notify function consequently)
+
 ### Changed
 
 - Behaviour at the end of round: it STOPS (no automatic run). You have now to hit "play" button again.

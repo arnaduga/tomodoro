@@ -1,5 +1,5 @@
 if ("serviceWorker" in navigator) {
-	navigator.serviceWorker.register("./sw.js");
+navigator.serviceWorker.register("./sw.js");
 }
 
 let timerWorker = new Worker("./worker.js");
@@ -132,7 +132,7 @@ function nextRound() {
 			maxDuration: config[roundInfo.current],
 		});
 	}
-	notify(`${finished} complete!`, body);
+	notify(`${finished} complete!`, body, roundInfo.current);
 	pauseplay()
 }
 
@@ -222,7 +222,20 @@ notifSelect.addEventListener("change", function () {
 	localStorage.setItem("pomo-notif", this.value);
 });
 
-function notify(title, message) {
+function notify(title, message, round) {
+
+	switch (round) {
+		case "focus":
+			round_icon = "./icons/focus.png";
+			break;
+		case "short":
+			round_icon = "./icons/short-break.png";
+			break;
+		case "long":
+			round_icon = "./icons/long-break.png";
+			break;
+	}
+
 	if (!notificationEnabled) return;
 	if (!("Notification" in window)) {
 		return;
@@ -230,7 +243,7 @@ function notify(title, message) {
 		if (notification) notification.close();
 		notification = new Notification(title, {
 			body: message,
-			icon: "./icons/icon192.png",
+			icon: round_icon,
 			silent: notificationSilent,
 		});
 	} else if (Notification.permission !== "denied") {
@@ -238,7 +251,7 @@ function notify(title, message) {
 			if (permission === "granted") {
 				notification = new Notification(title, {
 					body: message,
-					icon: "./icons/icon192.png",
+					icon: round_icon,
 					silent: notificationSilent,
 				});
 			}
